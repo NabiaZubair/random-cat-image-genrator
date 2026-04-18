@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        h2{
+            color: rgb(45, 4, 108);
+            margin-bottom: 20px;
+        }
+        .image-style{
+            height: 300px;
+            width: 300px;
+            object-fit: cover;
+        }
+        .cat{
+            height: 300px;
+            width: 300px;
+        }
+
+        .display{
+            background-color: blueviolet;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 15px;
+            font-size: 1.25rem;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <h2>Random Cat Images</h2>
+    <div>
+    <img class="cat" src="cat.avif">
+    </div>
+   
+    <button class="display">show cat</button>
+     </div>
+    <script>
+        let cat = document.querySelector(".cat");
+        let display = document.querySelector(".display")
+
+        let baseUrl = "https://api.thecatapi.com/v1/images/search";
+        async function getImage() {
+            const res = await fetch(baseUrl);
+            const data = await res.json();
+            cat.classList.add("image-style")
+            cat.src = data[0].url;
+        }
+        display.addEventListener("click", () => {
+            getImage();
+        })
+
+    </script>
+</body>
+
+</html>
